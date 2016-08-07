@@ -1,0 +1,66 @@
+body {
+    font-family: Roboto, Helvetica, Arial;
+    margin: 0px;
+}
+
+header {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.075);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.container {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header__title {
+    display: inline;
+}
+
+.header__nav {
+    display: inline-flex;
+    float: right;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.header__nav-item {
+    margin: 5px;
+}
+
+.header__nav-item:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.agent__columns {
+    display: flex;
+}
+
+.agent__list {
+    width: 200px;
+}
+
+.agent__details {
+    margin-left: 10px;
+}
+
+.agent__selected,
+.agent__cell {
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid rgba(1, 1, 1, 0.1);
+}
+
+.agent__selected {
+    border: 1px solid red;
+}
+
+.active-flag {
+    float: right;
+    color: green;
+}

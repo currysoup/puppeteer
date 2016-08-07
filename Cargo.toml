@@ -1,0 +1,13 @@
+[package]
+name = "puppeteer"
+version = "0.1.0"
+authors = ["sam"]
+
+[dependencies]
+iron = "0.4.0"
+mount = "0.2.1"
+router = "0.2.0"
+serde = "0.8.0"
+serde_json = "0.8.0"
+serde_macros = "0.8.0"
+staticfile = "0.3.0"
