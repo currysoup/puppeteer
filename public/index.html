@@ -5,123 +5,17 @@
     <title>Puppeteer</title>
     <meta charset='utf-8'>
     <link rel='stylesheet' type='text/css' href='style.css'>
+    <script src="lib/babel-browser.min.js"></script>
+    <script src="lib/react.min.js"></script>
+    <script src="lib/react-dom.min.js"></script>
+    <script src="lib/react-router.min.js"></script>
+    <script src="lib/reqwest.min.js"></script>
 </head>
 
 <body>
+    <div id='react-mount' class='container'></div>
 
-<header>
-    <div class='container'>
-        <h3 class='header__title'>Puppeteer</h3>
-
-        <nav class='header__nav'>
-            <a class='header__nav-item' onclick='switchToAgents()'>Agents</a>
-            <a class='header__nav-item' onclick='switchToSensors()'>Sensors</a>
-        </nav>
-    </div>
-</header>
-
-<div id='main' class='container'>
-</div>
-
-
-<template id='agent'>
-    <div class='agent__columns'>
-        <div class='agent__list'>
-            <div>
-                <h4>Agents:</h4>
-            </div>
-            <div id='agent-list'></div>
-        </div>
-
-        <div class='agent__details'>
-            <h4>Details:</h4>
-            <div id='agent-details'></div>
-        </div>
-    </div>
-</template>
-
-<template id='sensor'>
-    <div>
-        Sensors!
-    </div>
-</template>
-
-<template id='agent-cell'>
-    <div class='agent__cell'>
-        <div>
-            <span id='agent-name'></span>
-            <span id='agent-active' class='active-flag'></span>
-        </div>
-    </div>
-</template>
-
-<script>
-function get(address, callback) {
-    var xhttp = new XMLHttpRequest();
-    xhttp.addEventListener('load', function() {
-        var obj = JSON.parse(xhttp.response);
-        callback(obj)
-    });
-    xhttp.open("GET", address, true);
-    xhttp.send();
-}
-
-function setStringInElement(root, childName, text) {
-    root.querySelector('#' + childName).innerHTML = text;
-}
-
-function switchToAgents() {
-    document.querySelector('#main').innerHTML = document.querySelector('#agent').innerHTML;
-    loadAgents();
-}
-
-var agents = [];
-var selectedIdx = 0;
-
-function loadAgents() {
-    get("api/agents", function(newAgents) {
-        agents = newAgents;
-        renderAgents();
-    });
-}
-
-function renderAgents() {
-    var list = document.querySelector('#agent-list');
-    list.innerHTML = '';
-
-    agents.forEach(function(e, i) {
-        var agent = document.importNode(document.querySelector('#agent-cell').content, true);
-        agent.children[0].setAttribute('onclick', 'selectAgent(' + i + ')');
-        setStringInElement(agent, 'agent-name', e.name);
-
-        if (e.active) {
-            console.log("asdsa")
-            agent.querySelector('#agent-active').innerHTML = '✔️';
-        }
-
-        if (i == selectedIdx) {
-            agent.children[0].className += " agent__selected";
-        }
-
-        list.appendChild(agent);
-    });
-    setDetailed(agents[selectedIdx]);
-}
-
-function setDetailed(agent) {
-    document.querySelector('#agent-details').innerHTML = agent.details;
-}
-
-function selectAgent(idx) {
-    selectedIdx = idx;
-    renderAgents();
-}
-
-function switchToSensors() {
-    document.querySelector('#main').innerHTML = document.querySelector('#sensor').innerHTML;
-}
-
-</script>
+    <script type='text/javascript' src='api.js'></script>
+    <script type='text/babel' src='app.js'></script>
 </body>
-
 </html>
